@@ -13,9 +13,9 @@ import se.tradedoubler.bankaccount.store.DataStore;
 /**
  * Test class for bank operations
  */
-public class BankAcountHandlerImplTest
+public class BankAccountHandlerImplTest
 {
-	private BankAcountHandlerImpl accountHolder = new BankAcountHandlerImpl();
+	private BankAccountHandlerImpl accountHolder = new BankAccountHandlerImpl();
 	private DataStore dataStore = DataStore.getInstance();
 
 	/**

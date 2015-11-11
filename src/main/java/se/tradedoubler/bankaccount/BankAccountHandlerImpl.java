@@ -16,9 +16,9 @@ import se.tradedoubler.bankaccount.store.DataStore;
 /**
  * Implements IBankAccountHandler interface
  */
-public class BankAcountHandlerImpl implements IBankAccountHandler
+public class BankAccountHandlerImpl implements IBankAccountHandler
 {
-	private static final Logger logger = Logger.getLogger(BankAcountHandlerImpl.class);
+	private static final Logger logger = Logger.getLogger(BankAccountHandlerImpl.class);
 
 	private DataStore dao = DataStore.getInstance();
 	private List<IBankAccountEventListener> accountEventListeners = new ArrayList<>();
@@ -26,7 +26,7 @@ public class BankAcountHandlerImpl implements IBankAccountHandler
 	/**
 	 * Class constructor
 	 */
-	public BankAcountHandlerImpl()
+	public BankAccountHandlerImpl()
 	{
 		super();
 	}
