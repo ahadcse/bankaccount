@@ -66,12 +66,10 @@ public class DataStore {
      */
     public void addTransaction(Transaction transaction) {
         int accountId = transaction.getAccount().getAccountId();
-
         synchronized (transactions) {
             transaction.setTransactionId(transactions.size());
             transactions.put(transaction.getTransactionId(), transaction);
         }
-
         synchronized (accountTransactions) {
             List<Transaction> accTransactions = accountTransactions.get(accountId);
             if (accTransactions == null) {
@@ -79,7 +77,6 @@ public class DataStore {
                 accountTransactions.put(accountId, accTransactions);
             }
             accTransactions.add(transaction);
-
         }
     }
 
@@ -105,7 +102,6 @@ public class DataStore {
         if (accTransactions == null || accTransactions.isEmpty()) {
             return Collections.emptyList();
         }
-
         // Sort by date descending.
         Collections.sort(accTransactions, new Comparator<Transaction>() {
             @Override
@@ -113,7 +109,6 @@ public class DataStore {
                 return (int) (tx2.getDate().getTime() - tx1.getDate().getTime());
             }
         });
-
         return accTransactions.subList(0, Math.min(accTransactions.size(), transactionCount));
     }
 
@@ -126,7 +121,6 @@ public class DataStore {
      */
     public List<Account> getAccountsExceedingBalance(float balanceLimit) {
         List<Account> foundAccounts = new ArrayList<>();
-
         final Map<Integer, Float> accountBalances = new HashMap<>();
         for (Account account : accounts.values()) {
             float accountBalance = getAccountBalance(account.getAccountId());
@@ -135,7 +129,6 @@ public class DataStore {
                 accountBalances.put(account.getAccountId(), accountBalance); // Keeping the balance to sort later.
             }
         }
-
         // Sort in balance's descending order.
         Collections.sort(foundAccounts, new Comparator<Account>() {
             @Override
@@ -143,7 +136,6 @@ public class DataStore {
                 return (int) (100 * (accountBalances.get(account2.getAccountId()) - accountBalances.get(account1.getAccountId())));
             }
         });
-
         return foundAccounts;
     }
 
@@ -158,7 +150,6 @@ public class DataStore {
         if (accTransactions == null || accTransactions.isEmpty()) {
             return 0.0f;
         }
-
         float balance = 0.0f;
         for (Transaction accTransaction : accTransactions) {
             if (accTransaction.isDeposite()) {
